@@ -21,6 +21,7 @@ public class TodosTests {
 
     @Test
     public void emptyTasksList () {
+        Todos todos = new Todos();
         Assertions.assertEquals("", todos.getAllTasks());
     }
 
