@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 public class TodoServer {
     private final int port;
@@ -17,9 +18,11 @@ public class TodoServer {
     }
 
     public void start () throws IOException {
+        Operations operations = new Operations();
         System.out.println("Starting server at " + port + "...");
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
+        List<String> tasks;
         try (ServerSocket serverSocket = new ServerSocket(port)) { // стартуем сервер один(!) раз
             while (true) { // в цикле(!) принимаем подключения
                 try (
@@ -29,13 +32,15 @@ public class TodoServer {
                     // обработка одного подключения
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                     String request = in.readLine();
-                    Todos todo = gson.fromJson(request, Todos.class);
-                    switch (todo.getType()) {
+                    InputFormat json = gson.fromJson(request, InputFormat.class);
+                    switch (json.getType()) {
                         case "ADD":
-                            todos.addTask(todo.getTask());
+                            tasks = operations.addTask(todos.getTasks(), json.getTask());
+                            todos.setTasks(tasks);
                             break;
                         case "REMOVE":
-                            todos.removeTask(todo.getTask());
+                            tasks = operations.removeTask(todos.getTasks(), json.getTask());
+                            todos.setTasks(tasks);
                             break;
                         default:
                             System.out.println("Wrong operation");

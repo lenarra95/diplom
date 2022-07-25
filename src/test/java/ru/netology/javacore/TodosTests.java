@@ -26,16 +26,18 @@ public class TodosTests {
     }
 
     @Test
-    public void positiveCheckSorting() {
+    public void positiveCheckSorting () {
+        Operations operations = new Operations();
         List<String> tasks = new ArrayList<>(List.of(new String[]{"2", "6", "0", "Tasks"}));
         for (String task : tasks) {
-            todos.addTask(task);
+            todos.setTasks(operations.addTask(todos.getTasks(), task));
         }
         Collections.sort(tasks);
         Assertions.assertEquals(tasks, todos.getTasks());
     }
+
     @Test
-    public void checkUpperCase() {
+    public void checkUpperCase () {
         String addOperation = "add";
         Todos todo = new Todos(addOperation, "Task");
         Assertions.assertEquals(addOperation.toUpperCase(), todo.type);

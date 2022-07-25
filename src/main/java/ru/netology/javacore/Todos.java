@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Todos {
 
-    StringBuilder builder = new StringBuilder();
+    private StringBuilder builder = new StringBuilder();
 
-    List<String> tasks = new ArrayList<>();
+    private List<String> tasks = new ArrayList<>();
 
     String type;
     String task;
@@ -27,20 +27,6 @@ public class Todos {
         return task;
     }
 
-    public void addTask (String task) {
-        tasks.add(task);
-        Collections.sort(tasks);
-    }
-
-    public void removeTask (String task) {
-        boolean isRemoved = tasks.remove(task);
-        if (isRemoved) {
-            System.out.println("Задача '" + task + "' удалена");
-        } else {
-            System.out.println("Задачи '" + task + "' нет в списке");
-        }
-    }
-
     public String getAllTasks () {
         for (String task : tasks) {
             builder.append(task + " ");
@@ -52,5 +38,9 @@ public class Todos {
 
     public List<String> getTasks () {
         return tasks;
+    }
+
+    public void setTasks (List<String> tasks) {
+        this.tasks = tasks;
     }
 }
