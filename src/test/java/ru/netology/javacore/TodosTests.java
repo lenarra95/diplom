@@ -15,7 +15,7 @@ public class TodosTests {
     Todos todos;
 
     @BeforeAll
-    public void initTextGraphicsConverterNew () {
+    public void initTodos () {
         todos = new Todos();
     }
 
@@ -37,9 +37,12 @@ public class TodosTests {
     }
 
     @Test
-    public void checkUpperCase () {
-        String addOperation = "add";
-        Todos todo = new Todos(addOperation, "Task");
-        Assertions.assertEquals(addOperation.toUpperCase(), todo.type);
+    public void correctSetEmptyTasks () {
+        List<String> tasks = new ArrayList<>();
+        tasks.add("Task#1");
+        todos.setTasks(tasks);
+        Assertions.assertEquals(tasks, todos.getTasks());
+        todos.setTasks(new ArrayList<>());
+        Assertions.assertEquals("", todos.getAllTasks());
     }
 }

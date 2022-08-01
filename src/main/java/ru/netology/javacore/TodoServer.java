@@ -33,7 +33,7 @@ public class TodoServer {
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                     String request = in.readLine();
                     InputFormat json = gson.fromJson(request, InputFormat.class);
-                    switch (json.getType()) {
+                    switch (json.getType().toUpperCase()) {
                         case "ADD":
                             tasks = operations.addTask(todos.getTasks(), json.getTask());
                             todos.setTasks(tasks);

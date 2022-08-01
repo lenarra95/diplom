@@ -8,23 +8,7 @@ public class Todos {
 
     private List<String> tasks = new ArrayList<>();
 
-    String type;
-    String task;
-
     public Todos () {
-    }
-
-    public Todos (String type, String task) {
-        this.type = type.toUpperCase();
-        this.task = task;
-    }
-
-    public String getType () {
-        return type;
-    }
-
-    public String getTask () {
-        return task;
     }
 
     public String getAllTasks () {
